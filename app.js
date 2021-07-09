@@ -17,13 +17,12 @@ const server = http.createServer((req, res) => {
 
 
     if (req.url === "/" && req.method === "GET") {
-        Question.find()
-            .then(result => {
-                res.statusCode = 200;
-                res.setHeader('Content-Type', 'application/json')
-                res.setHeader('Access-Control-Allow-Origin', '*')
-                res.end("Hello Welcome")
-            }).catch(error => res.end(JSON.stringify(error)))
+
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json')
+        res.setHeader('Access-Control-Allow-Origin', '*')
+        res.end("Hello Welcome")
+
     }
 
     else if (req.url === "/questions" && req.method === "GET") {
