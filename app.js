@@ -62,7 +62,7 @@ const server = http.createServer((req, res) => {
                     correctAnswers = correctAnswers + 1;
                 }
             });
-            const addData = new Result({
+            new Result({
                 mailid: obj.mailid,
                 answers: obj.answers,
                 notAttempted: notAttempted,
@@ -71,14 +71,14 @@ const server = http.createServer((req, res) => {
                 finalScore: correctAnswers + " Out of " + obj.answers.length
             }).save()
                 .then(result => {
-                    Result.findOne({ mailid: obj.mailid }, (error, result) => {
+                    Result.findOne({ _id: result._id }, (error, response) => {
                         if (error) {
                             console.log(error)
                         } else {
                             res.statusCode = 200;
                             res.setHeader('Content-Type', 'application/json')
                             res.setHeader('Access-Control-Allow-Origin', '*')
-                            return res.end(JSON.stringify(result))
+                            return res.end(JSON.stringify(response))
                         }
                     })
 
